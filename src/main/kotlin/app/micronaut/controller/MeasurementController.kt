@@ -35,7 +35,7 @@ open class MeasurementController(private val measurementRepository: MeasurementR
 
     @Get("/list")
     open fun list(@Valid pageable: Pageable): List<Measurement> =
-        measurementRepository.customList()
+        measurementRepository.findAllSensor()
 
     @Post
     open fun save(@Body command: MeasurementSaveCommand): HttpResponse<Measurement> {
