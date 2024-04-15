@@ -3,6 +3,7 @@ package app.micronaut.controller
 import app.micronaut.command.MeasurementSaveCommand
 import app.micronaut.command.MeasurementUpdateCommand
 import app.micronaut.domain.Measurement
+import app.micronaut.domain.MeasurementWithSensorName
 import app.micronaut.repository.MeasurementRepository
 import io.micronaut.data.model.Pageable
 import io.micronaut.http.HttpHeaders
@@ -21,7 +22,7 @@ import java.time.Instant
 open class MeasurementController(private val measurementRepository: MeasurementRepository) {
 
     @Get("/{id}")
-    fun show(id: Long): Optional<Measurement> =
+    fun show(id: Int): Optional<Measurement> =
         measurementRepository.findById(id)
 
     @Put
@@ -34,8 +35,10 @@ open class MeasurementController(private val measurementRepository: MeasurementR
     }
 
     @Get("/list")
-    open fun list(@Valid pageable: Pageable): List<Measurement> =
-        measurementRepository.findAllSensor()
+    open fun list(@Valid pageable: Pageable): List<MeasurementWithSensorName> {
+        val res = measurementRepository.findAllWithSensorName()
+        return res
+    }
 
     @Post
     open fun save(@Body command: MeasurementSaveCommand): HttpResponse<Measurement> {
@@ -49,9 +52,9 @@ open class MeasurementController(private val measurementRepository: MeasurementR
 
     @Delete("/{id}")
     @Status(HttpStatus.NO_CONTENT)
-    fun delete(id: Long) = measurementRepository.deleteById(id)
+    fun delete(id: Int) = measurementRepository.deleteById(id)
 
-    private val Long?.location: URI
+    private val Int?.location: URI
         get() = URI.create("/measurements/$this")
 
     private val Measurement.location: URI

@@ -6,6 +6,6 @@ import java.time.Instant
 
 @Serdeable
 data class MeasurementSaveCommand(
-    val sensorId: Long,
+    val sensorId: Int,
     val value: String
 )

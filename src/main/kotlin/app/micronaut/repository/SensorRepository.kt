@@ -10,7 +10,7 @@ import jakarta.transaction.Transactional
 import jakarta.validation.constraints.NotBlank
 
 @JdbcRepository(dialect = Dialect.MYSQL)
-abstract class SensorRepository : PageableRepository<Sensor, Long> {
+abstract class SensorRepository : PageableRepository<Sensor, Int> {
 
     abstract fun save(@NotBlank sensorName: String): Sensor
 
@@ -20,7 +20,7 @@ abstract class SensorRepository : PageableRepository<Sensor, Long> {
         throw DataAccessException("test exception")
     }
 
-    abstract fun update(@Id id: Long, @NotBlank sensorName: String): Long
+    abstract fun update(@Id id: Int, @NotBlank sensorName: String): Int
 
     @Transactional
     open fun addSensor(sensorName: String): Sensor {

@@ -26,7 +26,7 @@ import jakarta.validation.constraints.NotBlank
 open class SensorController(private val sensorRepository: SensorRepository) {
 
     @Get("/{id}")
-    fun show(id: Long): Optional<Sensor> =
+    fun show(id: Int): Optional<Sensor> =
         sensorRepository.findById(id)
 
     @Put
@@ -53,9 +53,9 @@ open class SensorController(private val sensorRepository: SensorRepository) {
 
     @Delete("/{id}")
     @Status(HttpStatus.NO_CONTENT)
-    fun delete(id: Long) = sensorRepository.deleteById(id)
+    fun delete(id: Int) = sensorRepository.deleteById(id)
 
-    private val Long?.location: URI
+    private val Int?.location: URI
         get() = URI.create("/sensors/$this")
 
     private val Sensor.location: URI

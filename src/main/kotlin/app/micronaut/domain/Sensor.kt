@@ -10,7 +10,7 @@ import io.micronaut.serde.annotation.Serdeable
 data class Sensor(
     @field:Id
     @field:GeneratedValue
-    var id: Long? = null,
+    var id: Int? = null,
     var sensorName: String,
     var sensorDescription: String? = null
 )

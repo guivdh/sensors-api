@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank
 
 @Serdeable
 data class SensorUpdateCommand(
-    val id: Long,
+    val id: Int,
     @field:NotBlank val sensorName: String,
     val sensorDescription: String? = null
 )
