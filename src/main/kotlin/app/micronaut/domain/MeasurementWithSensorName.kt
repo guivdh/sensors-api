@@ -10,5 +10,5 @@ data class MeasurementWithSensorName(
     val sensor_id: Int,
     val value: String,
     val measured_at: Instant,
-    val sensor_name: String
+    val sensor_name: String,
 )
